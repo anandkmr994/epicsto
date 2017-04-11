@@ -5,6 +5,7 @@ import com.aerospike.client.Key;
 import com.aerospike.client.Record;
 import com.aerospike.client.policy.ClientPolicy;
 import com.aerospike.client.policy.Policy;
+import com.datastax.driver.core.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,5 +33,13 @@ public class HelloController {
 		Key key = new Key("test","experiment","name");
 		Record record = AerospikeInstance.getClientInstance().get(policy.readPolicyDefault, key);
 		return new ModelAndView("hellopage","msg",record.toString());
+	}
+
+	@RequestMapping("/cassandra")
+	public ModelAndView connectCassandra(){
+		CassandraClient cassandraClient = new CassandraClient();
+		Session session = cassandraClient.getClientSession();
+		return new ModelAndView("hellopage","msg","cassandra cluster name is : " +
+				session.getCluster().getMetadata().getClusterName());
 	}
 }
