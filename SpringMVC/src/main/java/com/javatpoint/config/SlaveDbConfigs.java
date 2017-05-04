@@ -69,31 +69,31 @@ public class SlaveDbConfigs {
     //master db beans
 
     @Bean
-    public DataSource dataSourceForSlaveDb() {
-        String ds = environment.getProperty("jdbc.slave.ds");
-        String url = environment.getProperty("jdbc.slave.url");
-        String userName = environment.getProperty("jdbc.slave.username");
-        String password = environment.getProperty("jdbc.slave.password");
-        return makeDataSource(ds,url,userName,password);
+    public JpaTransactionManager transactionManagerSlaveDb() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emFactoryForSlaveDb().getObject());
+        return transactionManager;
     }
 
 
     @Bean
-    public EntityManagerFactory emFactoryForSlaveDb() {
+    public LocalContainerEntityManagerFactoryBean emFactoryForSlaveDb() {
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSourceForSlaveDb());
         entityManagerFactoryBean.setPackagesToScan("com.javatpoint.entity");
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         entityManagerFactoryBean.setJpaProperties(getJpaProperties());
-        return entityManagerFactoryBean.getObject();
+        return entityManagerFactoryBean;
     }
 
     @Bean
-    public JpaTransactionManager transactionManagerSlaveDb() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emFactoryForSlaveDb());
-        return transactionManager;
+    public DataSource dataSourceForSlaveDb() {
+        String ds = environment.getProperty("jdbc.slave.ds");
+        String url = environment.getProperty("jdbc.slave.url");
+        String userName = environment.getProperty("jdbc.slave.username");
+        String password = environment.getProperty("jdbc.slave.password");
+        return makeDataSource(ds,url,userName,password);
     }
 
 }

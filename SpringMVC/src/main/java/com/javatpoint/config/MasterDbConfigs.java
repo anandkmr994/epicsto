@@ -68,6 +68,26 @@ public class MasterDbConfigs {
 
     //master db beans
 
+
+    @Bean
+    public JpaTransactionManager transactionManagerMasterDb() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emFactoryForMasterDb().getObject());
+        return transactionManager;
+    }
+
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean emFactoryForMasterDb() {
+        JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(dataSourceForMasterDb());
+        entityManagerFactoryBean.setPackagesToScan("com.javatpoint.entity");
+        entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
+        entityManagerFactoryBean.setJpaProperties(getJpaProperties());
+        return entityManagerFactoryBean;
+    }
+
     @Bean
     public DataSource dataSourceForMasterDb() {
         String ds = environment.getProperty("jdbc.ds");
@@ -75,25 +95,6 @@ public class MasterDbConfigs {
         String userName = environment.getProperty("jdbc.username");
         String password = environment.getProperty("jdbc.password");
         return makeDataSource(ds,url,userName,password);
-    }
-
-
-    @Bean
-    public EntityManagerFactory emFactoryForMasterDb() {
-        JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSourceForMasterDb());
-        entityManagerFactoryBean.setPackagesToScan("com.javatpoint.entity");
-        entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
-        entityManagerFactoryBean.setJpaProperties(getJpaProperties());
-        return entityManagerFactoryBean.getObject();
-    }
-
-    @Bean
-    public JpaTransactionManager transactionManagerMasterDb() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emFactoryForMasterDb());
-        return transactionManager;
     }
 
 }

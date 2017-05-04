@@ -5,6 +5,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,9 @@ public class CommonConfiguration {
     @Autowired
     Environment environment ;
 
+    @Autowired
+    private static ApplicationContext applicationContext ;
+
     static{
         LOGGER.info("loading all the beans");
     }
@@ -43,6 +47,12 @@ public class CommonConfiguration {
         internalResourceViewResolver.setPrefix("/WEB-INF/jsp/");
         internalResourceViewResolver.setSuffix(".jsp");
         return internalResourceViewResolver ;
+    }
+
+    public static void displayAllBeans(){
+        for(String beanName : applicationContext.getBeanDefinitionNames()){
+            LOGGER.info("bean : " + beanName.toString());
+        }
     }
 
 
