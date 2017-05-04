@@ -4,7 +4,33 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  
+
+
+    <display-name>epicsto server</display-name>
+
+    <!-- Do not use an XML-based Spring configuration, but annotation only. -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>com.javatpoint.config.CommonConfiguration</param-value>
+
+    </context-param>
+
+
+    <listener>
+        <listener-class>com.javatpoint.logging.LogbackConfigLocationListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+
+
   <servlet>
   <servlet-name>spring</servlet-name>
   <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
