@@ -1,0 +1,16 @@
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/PropertiesContext.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/config/MyWebInitializer.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/slaveRepository/SlaveStudentRepository.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/CassandraClient.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/logging/LogbackConfigLocationListener.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/HelloController.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/WelcomeController.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/repository/StudentRepository.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/service/StudentService.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/config/MasterDbConfigs.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/AerospikeInstance.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/entity/Student.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/config/SpringWebConfig.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/StudentController.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/config/SlaveDbConfigs.java
+/home/anand/epicsto/SpringMVC/src/main/java/com/javatpoint/config/CommonConfiguration.java

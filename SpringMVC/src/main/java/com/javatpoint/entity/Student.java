@@ -10,6 +10,8 @@ import javax.persistence.*;
 public class Student {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id ;
 
     @Column(name = "name")
@@ -17,6 +19,8 @@ public class Student {
 
     @Column(name = "age")
     private int age ;
+
+    public Student(){}; 
 
     public Student(String name, int age) {
         this.name = name;

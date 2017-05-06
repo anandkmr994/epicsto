@@ -17,8 +17,9 @@ public class StudentController {
     private StudentService studentService ;
 
     @RequestMapping("/create")
-    public void createStudentRow(){
-        studentService.createStudent(23, "anand kumar");
+    public ModelAndView createStudentRow(){
+       String result =  studentService.createStudent(23, "anand kumar");
+       return new ModelAndView("hellopage","msg",result);
     }
 
     @RequestMapping("/get")

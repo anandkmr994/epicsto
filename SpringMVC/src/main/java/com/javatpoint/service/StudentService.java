@@ -23,10 +23,11 @@ public class StudentService {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(StudentService.class);
 
-    public void createStudent(int age, String name){
+    public String createStudent(int age, String name){
         Student student = new Student(name, age);
         LOGGER.info("going to create a student row in master");
         studentRepository.save(student);
+	return "created student ";
     }
 
     public String getStudents(String name){

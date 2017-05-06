@@ -35,7 +35,7 @@ public class CommonConfiguration {
     Environment environment ;
 
     @Autowired
-    private static ApplicationContext applicationContext ;
+    private ApplicationContext applicationContext ;
 
     static{
         LOGGER.info("loading all the beans");
@@ -49,10 +49,13 @@ public class CommonConfiguration {
         return internalResourceViewResolver ;
     }
 
-    public static void displayAllBeans(){
+    @Bean
+    public String[] displayAllBeans(){
         for(String beanName : applicationContext.getBeanDefinitionNames()){
             LOGGER.info("bean : " + beanName.toString());
+            System.out.println("bean : " + beanName.toString());
         }
+        return applicationContext.getBeanDefinitionNames();
     }
 
 
