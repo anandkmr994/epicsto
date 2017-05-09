@@ -27,7 +27,7 @@
             <outputPatternAsHeader>true</outputPatternAsHeader>
         </encoder>
     </appender>
-    <logger name="com.javatpoint" level="ALL">
+    <logger name="com.epicsto" level="ALL">
     </logger>
 
     <root level="ERROR">
