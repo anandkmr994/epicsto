@@ -12,4 +12,25 @@ public class GsonSerializer {
     private static final Logger LOGGER = LoggerFactory.getLogger(GsonSerializer.class);
     
     private static final Gson gson = new Gson();
+
+    private static final GsonSerializer INSTANCE = new GsonSerializer();
+
+    public static GsonSerializer getInstance(){
+        return INSTANCE ;
+    }
+
+
+    public String toJson(Object object){
+        if(null == object){
+            return  null ;
+        }
+        return gson.toJson(object);
+    }
+
+    public Object fromJson(String json, Class klass){
+        if(null == json){
+            return  null ;
+        }
+        return gson.fromJson(json,klass);
+    }
 }

@@ -3,6 +3,8 @@ package com.epicsto.controllers;
 import com.epicsto.entity.User;
 import com.epicsto.json.GenericResponse;
 import com.epicsto.service.UserService;
+import com.epicsto.utils.GsonSerializer;
+import com.epicsto.utils.ObjectMapperUtility;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -33,11 +35,6 @@ public class UserController {
     @Autowired
     private UserService userService ;
 
-    private static Gson gson = new Gson();
-
-    private static ObjectMapper objectMapper = new ObjectMapper();
-
-
     @RequestMapping(method = RequestMethod.POST,value = "/register" ,headers = {"Accept=text/xml, application/json"})
     public @ResponseBody String registerUser(HttpServletRequest request,
                                              HttpServletResponse response,
@@ -46,7 +43,7 @@ public class UserController {
 
 
         if(null == body){
-            return gson.toJson(new GenericResponse("FAILURE",String.valueOf(HttpStatus.UNAUTHORIZED.value()),
+            return GsonSerializer.getInstance().toJson(new GenericResponse("FAILURE",String.valueOf(HttpStatus.UNAUTHORIZED.value()),
                     "Unauthorized Request"));
         }
 
@@ -54,7 +51,7 @@ public class UserController {
         String userPhone = null ;
         String userEmail = null ;
         try{
-            JsonNode json = objectMapper.readTree(body);
+            JsonNode json = ObjectMapperUtility.getInstance().readTree(body);
 
             if(null != json.get("userName")){
                 userName = json.get("userName").asText();
@@ -68,7 +65,7 @@ public class UserController {
 
         }catch(IOException e){
             LOGGER.error("error parsing the body of the request {} " , body );
-            return gson.toJson(new GenericResponse("FAILURE",String.valueOf(HttpStatus.BAD_REQUEST.value()),
+            return GsonSerializer.getInstance().toJson(new GenericResponse("FAILURE",String.valueOf(HttpStatus.BAD_REQUEST.value()),
                     "Bad Request"));
         }
         User user = new User();
@@ -79,11 +76,11 @@ public class UserController {
         int userId = userService.createUser(user);
 
         if(userId>0){
-            return gson.toJson(new GenericResponse("SUCCESS",String.valueOf(HttpStatus.OK.value()),
+            return GsonSerializer.getInstance().toJson(new GenericResponse("SUCCESS",String.valueOf(HttpStatus.OK.value()),
                     "User created with id : " + userId));
         }
 
-        return  gson.toJson(new GenericResponse("SUCCESS",String.valueOf(HttpStatus.OK.value()),
+        return  GsonSerializer.getInstance().toJson(new GenericResponse("SUCCESS",String.valueOf(HttpStatus.OK.value()),
                 "User can not be created, try after some time"));
     }
 
