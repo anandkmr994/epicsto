@@ -35,7 +35,7 @@ public class UserController {
 
     private static Gson gson = new Gson();
 
-    private static ObjectMapper objectMapper ;
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
 
     @RequestMapping(method = RequestMethod.POST,value = "/register" ,headers = {"Accept=text/xml, application/json"})
