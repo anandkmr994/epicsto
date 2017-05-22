@@ -3,9 +3,9 @@
     <timestamp key="bySecond" datePattern="yyyy-MM-dd:HH-mm-ss.SSS"/>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <append>true</append>
-        <file>logs/epicsto.log</file>
+        <file>logs/example.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/archive/epicsto-server.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>logs/archive/example-server.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
         </rollingPolicy>
 
         <encoder>
@@ -27,7 +27,7 @@
             <outputPatternAsHeader>true</outputPatternAsHeader>
         </encoder>
     </appender>
-    <logger name="com.epicsto" level="ALL">
+    <logger name="com.example" level="ALL">
     </logger>
 
     <root level="ERROR">
