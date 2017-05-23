@@ -6,8 +6,6 @@ import com.example.service.UserService;
 import com.example.utils.GsonSerializer;
 import com.example.utils.ObjectMapperUtility;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ import java.io.IOException;
  * Created on 9/5/17.
  */
 @RestController
-@Api(value = "user api")
+//@Api(value = "user api")
 public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -32,11 +30,12 @@ public class UserController {
 
 
     @RequestMapping(method = RequestMethod.POST,value = "/user/register" ,headers = {"Accept=text/xml, application/json"})
-    @ApiOperation(value = "/user/register api",
+    /*@ApiOperation(value = "/user/register api",
             notes = "used to register user in example",
             httpMethod = "POST",
             produces = "a json with response code and message",
             consumes = "a json with user name, user email, user phone")
+            */
     public @ResponseBody String registerUser(HttpServletRequest request,
                                              HttpServletResponse response,
                                              @RequestBody String body){
